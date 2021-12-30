@@ -1,0 +1,11 @@
+[package]
+name = "basic_listener"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+env_logger = "*"
+lol-game-client-api = "*"
+tokio = {version = "*", features = ["sync", "full"]}
+thiserror = "*"
+log = "*"

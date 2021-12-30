@@ -1,15 +1,16 @@
-This crate aims to provide a Rust interface with the League of Legends Game Client API. The official doc can be found here:
-https://developer.riotgames.com/docs/lol#game-client-api
+This crate aims to provide a Rust interface with the League of Legends Game Client API. The official doc can be found [here](https://developer.riotgames.com/docs/lol#game-client-api).
+
 
 The Game Client API is an API that is exposed by your local League of Legends Client,
-and should not be mistaken for the LoL API, for which there is already [a great crate](https://github.com/MingweiSamuel/Riv000en).
+and should not be mistaken for the LoL API, for which there is already [a great crate](https://github.com/MingweiSamuel/Riven).
 The API allows you to get some informations about the ongoing game.
 
 # Content of the crate
 
-There are currently two modules: 
+There are currently three modules: 
 - `api` which contains the `GameClient` and all it's methods that calls the API.
 - `model` which contains all the structures for the data that will be returned by the API.
+- `event_listener` which contains the definition of a trait to create structures that you can pass to `start_listener` to run a task that will periodically check for new `Events` and trigger callbacks accordingly. (you can see an example in `examples/basic_listener`)
 
 # How to use it
 ```rust
