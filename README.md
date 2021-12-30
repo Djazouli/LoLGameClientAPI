@@ -5,6 +5,12 @@ The Game Client API is an API that is exposed by your local League of Legends Cl
 and should not be mistaken for the LoL API, for which there is already [a great crate](https://github.com/MingweiSamuel/Riv000en).
 The API allows you to get some informations about the ongoing game.
 
+# Content of the crate
+
+There are currently two modules: 
+- `api` which contains the `GameClient` and all it's methods that calls the API.
+- `model` which contains all the structures for the data that will be returned by the API.
+
 # How to use it
 ```rust
 use lol_game_client_api::api::{GameClient, get_riot_root_certificate};
@@ -19,6 +25,12 @@ async fn main() {
     println!("Stats Runes: {:?}", active_player.full_runes.stat_runes)
 }
 ```
+
+## TODO
+Currently, some variants are missing from enums (see `model::DragonType` for example).  
+Also, some endpoints are not working at all (
+all the endpoints that require the `summonerName` as a `GET` param for example).  
+But all the structs to deserialize the response already exists, so this should not be too much work.
 
 ## Disclaimer
 
