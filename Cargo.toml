@@ -8,7 +8,6 @@ description = "League of Legends local Game Client API"
 readme = "README.md"
 edition = "2021"
 license = "MIT"
-license-file = "LICENSE"
 keywords = [ "riot-games", "riot", "league", "league-of-legends" ]
 categories = [ "api-bindings", "web-programming::http-client" ]
 
