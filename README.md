@@ -14,7 +14,7 @@ use tokio;
 async fn main() {
     let client = reqwest::ClientBuilder::new().add_root_certificate(get_riot_root_certificate()).build().unwrap();
     let client = GameClient::new(client);
-    let active_player = get_game_client().active_player().await.unwrap();
+    let active_player = client.active_player().await.unwrap();
     
     println!("Stats Runes: {:?}", active_player.full_runes.stat_runes)
 }
