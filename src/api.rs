@@ -24,13 +24,25 @@ pub enum QueryError {
     Reqwest(#[from] reqwest::Error), // An error of this type may suggests that the API specs as been updated and the crate is out-of-date. Please fill an issue !
 }
 
+impl Default for GameClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GameClient {
     /// Create a new `GameClient`using a `reqwest::Client`.
     /// As Riot Games self-sign their SSL certificates, it would be great to trust them in the `reqwest::Client`.
-    pub fn new(client: reqwest::Client) -> Self {
-        GameClient {
-            client
-        }
+    pub fn new() -> Self {
+        GameClient::_from_certificate(get_riot_root_certificate()).unwrap()
+    }
+
+    /// This method should only be used if Riot updates its root certificate and the crate is not up-to-date.
+    /// Otherwise, use `GameClient::new`
+    pub fn _from_certificate(certificate: Certificate) -> Result<Self, QueryError> {
+        Ok(GameClient {
+            client: reqwest::ClientBuilder::new().add_root_certificate(certificate).build()?
+        })
     }
 
     /// Query the endpoint and automagically deserialize the json into the desired type

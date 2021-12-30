@@ -1,12 +1,11 @@
 //! This tests can only run if the game is running, it checks the communication with the API.
 
-use lol_game_client_api::api::{GameClient, get_riot_root_certificate};
+use lol_game_client_api::api::GameClient;
 use tokio;
 
 
 fn get_game_client() -> GameClient {
-    let client = reqwest::ClientBuilder::new().add_root_certificate(get_riot_root_certificate()).build().unwrap();
-    GameClient::new(client)
+    GameClient::new()
 }
 
 #[tokio::test]
