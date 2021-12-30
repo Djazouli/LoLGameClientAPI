@@ -11,6 +11,10 @@ license = "MIT"
 keywords = [ "riot-games", "riot", "league", "league-of-legends" ]
 categories = [ "api-bindings", "web-programming::http-client" ]
 
+exclude = [
+"tests/*"
+]
+
 [dependencies]
 reqwest = {version = "*", features = ["json"]}
 serde = {version = "*", features = ["derive"]}
