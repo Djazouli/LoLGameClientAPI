@@ -1,7 +1,7 @@
 //! Module containing all the structures that can be deserialized from the `https://127.0.0.1:2999/liveclientdata/` endpoint.
 use serde::Deserialize;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct AllGameData {
     pub active_player: ActivePlayer,
@@ -10,7 +10,7 @@ pub struct AllGameData {
     pub game_data: GameData,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivePlayer {
     pub abilities: Abilities,
@@ -21,7 +21,7 @@ pub struct ActivePlayer {
     pub summoner_name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Player {
     pub champion_name: String,
@@ -42,11 +42,11 @@ pub struct Player {
 }
 
 // TODO
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Item {}
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Scores {
     pub assists: usize,
@@ -56,14 +56,14 @@ pub struct Scores {
     pub ward_score: f64,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SummonerSpells {
     pub summoner_spell_one: SummonerSpell,
     pub summoner_spell_two: SummonerSpell,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SummonerSpell {
     pub display_name: String,
@@ -71,7 +71,7 @@ pub struct SummonerSpell {
     pub raw_display_name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 pub enum Team {
     #[serde(rename = "ORDER")]
     Order,
@@ -79,7 +79,7 @@ pub enum Team {
     Chaos,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Abilities {
     #[serde(rename = "E")]
@@ -94,7 +94,7 @@ pub struct Abilities {
     pub w: Ability,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Ability {
     pub ability_level: Option<u8>, // May not have a level (on passive for example)
@@ -104,7 +104,7 @@ pub struct Ability {
     pub raw_display_name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ChampionStats {
     pub ability_power: f64, // May not have a level (on passive for example)
@@ -139,7 +139,7 @@ pub struct ChampionStats {
 }
 
 /// Runes for the active player
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct FullRunes {
     pub general_runes: Vec<Rune>,
@@ -150,7 +150,7 @@ pub struct FullRunes {
 }
 
 /// Runes for all the other players
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct PartialRunes {
     pub keystone: Rune,
@@ -158,7 +158,7 @@ pub struct PartialRunes {
     pub secondary_rune_tree: RuneTree,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Rune {
     pub display_name: String,
@@ -167,7 +167,7 @@ pub struct Rune {
     pub raw_display_name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct RuneTree {
     pub display_name: String,
@@ -176,14 +176,14 @@ pub struct RuneTree {
     pub raw_display_name: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct StatRunes {
     pub id: u16,
     pub raw_description: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct GameData {
     pub game_mode: GameMode,
@@ -193,7 +193,7 @@ pub struct GameData {
     pub map_terrain: String, // enum ?
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 pub enum GameMode {
     #[serde(rename = "CLASSIC")]
     Classic,
@@ -201,7 +201,7 @@ pub enum GameMode {
     Aram,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 #[serde(tag = "EventName")]
 pub enum Event {
     GameStart {
@@ -329,7 +329,7 @@ pub enum Event {
 }
 
 // TODO: All dragon types
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 pub enum DragonType {
     Elder,
     Earth,
@@ -341,7 +341,7 @@ impl DragonType {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct Events {
     #[serde(rename = "Events")]
     pub events: Vec<Event>,
