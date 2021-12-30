@@ -221,147 +221,147 @@ pub enum Event {
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct GameStart {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64, // TODO: time in seconds, but since when ? (GameStart is not at 0,00000)
+    pub event_time: f64, // TODO: time in seconds, but since when ? (GameStart is not at 0,00000)
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct MinionsSpawning {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct TurretKilled {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "TurretKilled")]
-    turret_killed: String,
+    pub turret_killed: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct InhibKilled {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "InhibKilled")]
-    inhib_killed: String,
+    pub inhib_killed: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct DragonKill {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
     #[serde(rename = "DragonType", default = "DragonType::unknown")]
-    dragon_type: DragonType,
+    pub dragon_type: DragonType,
     #[serde(rename = "Stolen")]
-    stolen: String,
+    pub stolen: String,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct FirstBrick {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct FirstBlood {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "Recipient")]
-    recipient: String,
+    pub recipient: String,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct HeraldKill {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
     #[serde(rename = "Stolen")]
-    stolen: String,
+    pub stolen: String,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct Ace {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "Acer")]
-    acer: String,
+    pub acer: String,
     #[serde(rename = "AcingTeam")]
-    acing_team: Team,
+    pub acing_team: Team,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct Multikill {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "KillStreak")]
-    kill_streak: u8,
+    pub kill_streak: u8,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct ChampionKill {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "VictimName")]
-    victim_name: String,
+    pub victim_name: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub struct BaronKill {
     #[serde(rename = "EventID")]
-    event_id: usize,
+    pub event_id: usize,
     #[serde(rename = "EventTime")]
-    event_time: f64,
+    pub event_time: f64,
     #[serde(rename = "KillerName")]
-    killer_name: String,
+    pub killer_name: String,
     #[serde(rename = "Assisters")]
-    assisters: Vec<String>,
+    pub assisters: Vec<String>,
     #[serde(rename = "Stolen")]
-    stolen: String,
+    pub stolen: String,
 }
 
 // TODO: All dragon types
