@@ -1,0 +1,348 @@
+//! Module containing all the structures that can be deserialized from the `https://127.0.0.1:2999/liveclientdata/` endpoint.
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AllGameData {
+    pub active_player: ActivePlayer,
+    pub all_players: Vec<Player>,
+    pub events: Events,
+    pub game_data: GameData,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ActivePlayer {
+    pub abilities: Abilities,
+    pub champion_stats: ChampionStats,
+    pub current_gold: f64,
+    pub full_runes: FullRunes,
+    pub level: usize,
+    pub summoner_name: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Player {
+    pub champion_name: String,
+    pub is_bot: bool,
+    pub is_dead: bool,
+    pub items: Vec<Item>,
+    pub level: usize,
+    pub position: String, // Enum ?
+    pub raw_champion_name: String,
+    pub respawn_timer: f64,
+    pub runes: PartialRunes,
+    pub scores: Scores,
+    #[serde(rename = "skinID")]
+    pub skin_id: usize,
+    pub summoner_name: String,
+    pub summoner_spells: SummonerSpells,
+    pub team: Team,
+}
+
+// TODO
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Item {}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Scores {
+    pub assists: usize,
+    pub creep_score: usize,
+    pub deaths: usize,
+    pub kills: usize,
+    pub ward_score: f64,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SummonerSpells {
+    pub summoner_spell_one: SummonerSpell,
+    pub summoner_spell_two: SummonerSpell,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SummonerSpell {
+    pub display_name: String,
+    pub raw_description: String,
+    pub raw_display_name: String,
+}
+
+#[derive(Deserialize)]
+pub enum Team {
+    #[serde(rename = "ORDER")]
+    Order,
+    #[serde(rename = "CHAOS")]
+    Chaos,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Abilities {
+    #[serde(rename = "E")]
+    pub e: Ability,
+    #[serde(rename = "Passive")]
+    pub passive: Ability,
+    #[serde(rename = "Q")]
+    pub q: Ability,
+    #[serde(rename = "R")]
+    pub r: Ability,
+    #[serde(rename = "W")]
+    pub w: Ability,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Ability {
+    pub ability_level: Option<u8>, // May not have a level (on passive for example)
+    pub display_name: String,
+    pub id: String,
+    pub raw_description: String,
+    pub raw_display_name: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ChampionStats {
+    pub ability_power: f64, // May not have a level (on passive for example)
+    pub armor: f64,
+    pub armor_penetration_flat: f64,
+    pub attack_damage: f64,
+    pub attack_range: f64,
+    pub attack_speed: f64,
+    pub bonus_armor_penetration_percent: f64,
+    pub bonus_magic_penetration_percent: f64,
+    pub crit_chance: f64,
+    pub crit_damage: f64,
+    pub current_health: f64,
+    pub heal_shield_power: Option<f64>, // Optional because not in docs, but appears to be here anyway
+    pub health_regen_rate: f64,
+    pub life_steal: f64,
+    pub magic_lethality: f64,
+    pub magic_penetration_flat: f64,
+    pub magic_penetration_percent: f64,
+    pub magic_resist: f64,
+    pub max_health: f64,
+    pub move_speed: f64,
+    pub omnivamp: Option<f64>, // Optional because not in docs, but appears to be here anyway
+    pub physical_lethality: f64,
+    pub physical_vamp: Option<f64>, // Optional because not in docs, but appears to be here anyway
+    pub resource_max: f64,
+    pub resource_regen_rate: f64,
+    pub resource_type: String, // Could be an enum I guess
+    pub resource_value: f64,
+    pub spell_vamp: f64,
+    pub tenacity: f64,
+}
+
+/// Runes for the active player
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FullRunes {
+    pub general_runes: Vec<Rune>,
+    pub keystone: Rune,
+    pub primary_rune_tree: RuneTree,
+    pub secondary_rune_tree: RuneTree,
+    pub stat_runes: [StatRunes; 3],
+}
+
+/// Runes for all the other players
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PartialRunes {
+    pub keystone: Rune,
+    pub primary_rune_tree: RuneTree,
+    pub secondary_rune_tree: RuneTree,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Rune {
+    pub display_name: String,
+    pub id: u16,
+    pub raw_description: String,
+    pub raw_display_name: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RuneTree {
+    pub display_name: String,
+    pub id: u16,
+    pub raw_description: String,
+    pub raw_display_name: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct StatRunes {
+    pub id: u16,
+    pub raw_description: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GameData {
+    pub game_mode: GameMode,
+    pub game_time: f64,
+    pub map_name: String,
+    pub map_number: usize,
+    pub map_terrain: String, // enum ?
+}
+
+#[derive(Deserialize)]
+pub enum GameMode {
+    #[serde(rename = "CLASSIC")]
+    Classic,
+    #[serde(rename = "ARAM")]
+    Aram,
+}
+
+#[derive(Deserialize)]
+#[serde(tag = "EventName")]
+pub enum Event {
+    GameStart {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64, // TODO: time in seconds, but since when ? (GameStart is not at 0,00000)
+    },
+    MinionsSpawning {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+    },
+    FirstBrick {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+    },
+    FirstBlood {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "Recipient")]
+        recipient: String,
+    },
+    TurretKilled {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "TurretKilled")]
+        turret_killed: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+    },
+    InhibKilled {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "InhibKilled")]
+        inhib_killed: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+    },
+    DragonKill {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+        #[serde(rename = "DragonType", default = "DragonType::unknown")]
+        dragon_type: DragonType,
+        #[serde(rename = "Stolen")]
+        stolen: String,
+    },
+    HeraldKill {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+        #[serde(rename = "Stolen")]
+        stolen: String,
+    },
+    BaronKill {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+        #[serde(rename = "Stolen")]
+        stolen: String,
+    },
+    ChampionKill {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "VictimName")]
+        victim_name: String,
+        #[serde(rename = "Assisters")]
+        assisters: Vec<String>,
+    },
+    Multikill {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "KillerName")]
+        killer_name: String,
+        #[serde(rename = "KillStreak")]
+        kill_streak: u8,
+    },
+    Ace {
+        #[serde(rename = "EventID")]
+        event_id: usize,
+        #[serde(rename = "EventTime")]
+        event_time: f64,
+        #[serde(rename = "Acer")]
+        acer: String,
+        #[serde(rename = "AcingTeam")]
+        acing_team: Team,
+    }
+}
+
+// TODO: All dragon types
+#[derive(Deserialize)]
+pub enum DragonType {
+    Elder,
+    Earth,
+}
+
+impl DragonType {
+    fn unknown() -> DragonType {
+        DragonType::Elder
+    }
+}
+
+#[derive(Deserialize)]
+pub struct Events {
+    #[serde(rename = "Events")]
+    pub events: Vec<Event>,
+}
