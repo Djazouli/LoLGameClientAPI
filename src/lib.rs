@@ -19,7 +19,18 @@ pub extern crate async_trait; // Re-export async_trait
 pub fn start_listener<L: EventListener + 'static>(mut listener: L, period: Duration) {
     tokio::spawn(async move {
         let client = GameClient::new();
-        let mut previous_number_of_events = 0;
+
+        let mut previous_number_of_events = match client.event_data().await {
+            Ok(events) => {
+                log::info!("Running the program when the game is already started. {} events already happened.", events.events.len());
+                events.events.len()
+            }
+            Err(_) => {
+                log::info!("Game is not running yet");
+                0
+            }
+        };
+
         loop {
             let events = match client.event_data().await {
                 Ok(events) => events.events,
