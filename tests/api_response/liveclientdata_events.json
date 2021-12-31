@@ -122,6 +122,18 @@
       "EventTime": 0.00000000000000000,
       "Acer": "Riot Tuxedo",
       "AcingTeam": "ORDER"
+    },
+    {
+      "EventID": 125,
+      "EventName": "InhibRespawningSoon",
+      "EventTime": 1110.1708984375,
+      "InhibRespawningSoon": "Barracks_T1_C1"
+    },
+    {
+      "EventID": 126,
+      "EventName": "InhibRespawned",
+      "EventTime": 1125.2091064453126,
+      "InhibRespawned": "Barracks_T1_C1"
     }
   ]
 }

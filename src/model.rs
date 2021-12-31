@@ -210,6 +210,8 @@ pub enum Event {
     FirstBlood(FirstBlood),
     TurretKilled(TurretKilled),
     InhibKilled(InhibKilled),
+    InhibRespawningSoon(InhibRespawningSoon),
+    InhibRespawned(InhibRespawned),
     DragonKill(DragonKill),
     HeraldKill(HeraldKill),
     BaronKill(BaronKill),
@@ -260,6 +262,26 @@ pub struct InhibKilled {
     pub inhib_killed: String,
     #[serde(rename = "Assisters")]
     pub assisters: Vec<String>,
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq)]
+pub struct InhibRespawningSoon {
+    #[serde(rename = "EventID")]
+    pub event_id: usize,
+    #[serde(rename = "EventTime")]
+    pub event_time: f64,
+    #[serde(rename = "InhibRespawningSoon")]
+    pub inhib_respawning_soon: String,
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq)]
+pub struct InhibRespawned {
+    #[serde(rename = "EventID")]
+    pub event_id: usize,
+    #[serde(rename = "EventTime")]
+    pub event_time: f64,
+    #[serde(rename = "InhibRespawned")]
+    pub inhib_respawned: String,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]

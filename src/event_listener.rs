@@ -1,7 +1,8 @@
 //!
 use crate::model::{
     Ace, BaronKill, ChampionKill, DragonKill, Event, FirstBlood, FirstBrick, GameStart, HeraldKill,
-    InhibKilled, MinionsSpawning, Multikill, Team, TurretKilled,
+    InhibKilled, InhibRespawned, InhibRespawningSoon, MinionsSpawning, Multikill, Team,
+    TurretKilled,
 };
 use async_trait::async_trait;
 use std::error::Error;
@@ -17,6 +18,8 @@ pub trait EventListener: Send + Sync {
             Event::FirstBlood(event) => self.on_first_blood(event).await,
             Event::TurretKilled(event) => self.on_turret_killed(event).await,
             Event::InhibKilled(event) => self.on_inhib_killed(event).await,
+            Event::InhibRespawningSoon(event) => self.on_inhib_respawning_soon(event).await,
+            Event::InhibRespawned(event) => self.on_inhib_respawned(event).await,
             Event::DragonKill(event) => self.on_dragon_killed(event).await,
             Event::HeraldKill(event) => self.on_herald_killed(event).await,
             Event::BaronKill(event) => self.on_baron_killed(event).await,
@@ -47,6 +50,15 @@ pub trait EventListener: Send + Sync {
     }
 
     async fn on_inhib_killed(&mut self, event: InhibKilled) -> Result<(), Self::Error> {
+        Ok(())
+    }
+    async fn on_inhib_respawning_soon(
+        &mut self,
+        event: InhibRespawningSoon,
+    ) -> Result<(), Self::Error> {
+        Ok(())
+    }
+    async fn on_inhib_respawned(&mut self, event: InhibRespawned) -> Result<(), Self::Error> {
         Ok(())
     }
 
