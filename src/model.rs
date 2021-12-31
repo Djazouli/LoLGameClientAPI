@@ -205,6 +205,7 @@ pub enum GameMode {
 #[serde(tag = "EventName")]
 pub enum Event {
     GameStart(GameStart),
+    GameEnd(GameEnd),
     MinionsSpawning(MinionsSpawning),
     FirstBrick(FirstBrick),
     FirstBlood(FirstBlood),
@@ -226,6 +227,14 @@ pub struct GameStart {
     pub event_id: usize,
     #[serde(rename = "EventTime")]
     pub event_time: f64, // TODO: time in seconds, but since when ? (GameStart is not at 0,00000)
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq)]
+pub struct GameEnd {
+    #[serde(rename = "EventID")]
+    pub event_id: usize,
+    #[serde(rename = "EventTime")]
+    pub event_time: f64,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]

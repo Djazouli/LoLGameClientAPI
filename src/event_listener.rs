@@ -1,7 +1,7 @@
 //!
 use crate::model::{
-    Ace, BaronKill, ChampionKill, DragonKill, Event, FirstBlood, FirstBrick, GameStart, HeraldKill,
-    InhibKilled, InhibRespawned, InhibRespawningSoon, MinionsSpawning, Multikill, Team,
+    Ace, BaronKill, ChampionKill, DragonKill, Event, FirstBlood, FirstBrick, GameEnd, GameStart,
+    HeraldKill, InhibKilled, InhibRespawned, InhibRespawningSoon, MinionsSpawning, Multikill, Team,
     TurretKilled,
 };
 use async_trait::async_trait;
@@ -13,6 +13,7 @@ pub trait EventListener: Send + Sync {
     async fn on_event(&mut self, event: Event) -> Result<(), Self::Error> {
         match event {
             Event::GameStart(event) => self.on_game_start(event).await,
+            Event::GameEnd(event) => self.on_game_end(event).await,
             Event::MinionsSpawning(event) => self.on_minion_spawn(event).await,
             Event::FirstBrick(event) => self.on_first_brick(event).await,
             Event::FirstBlood(event) => self.on_first_blood(event).await,
@@ -30,6 +31,10 @@ pub trait EventListener: Send + Sync {
     }
 
     async fn on_game_start(&mut self, event: GameStart) -> Result<(), Self::Error> {
+        Ok(())
+    }
+
+    async fn on_game_end(&mut self, event: GameEnd) -> Result<(), Self::Error> {
         Ok(())
     }
 
