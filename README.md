@@ -26,6 +26,9 @@ async fn main() {
 }
 ```
 
+A more complete example can be found in the repo [LoLCongratz](https://github.com/Djazouli/LoLCongratz). This is 
+a small binary that plays a sound in a virtual audio cable each time a teammate makes a kill.
+
 ## TODO
 Currently, some variants are missing from enums (see `model::DragonType` for example).  
 Also, some endpoints are not working at all (
