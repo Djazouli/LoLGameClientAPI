@@ -303,7 +303,7 @@ pub struct DragonKill {
     pub killer_name: String,
     #[serde(rename = "Assisters")]
     pub assisters: Vec<String>,
-    #[serde(rename = "DragonType", default = "DragonType::unknown")]
+    #[serde(rename = "DragonType")]
     pub dragon_type: DragonType,
     #[serde(rename = "Stolen")]
     pub stolen: String,
@@ -404,12 +404,6 @@ pub enum DragonType {
     Ocean,
     Hextech,
     Chemtech,
-}
-
-impl DragonType {
-    fn unknown() -> DragonType {
-        DragonType::Elder
-    }
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
