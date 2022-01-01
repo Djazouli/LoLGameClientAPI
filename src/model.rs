@@ -395,11 +395,15 @@ pub struct BaronKill {
     pub stolen: String,
 }
 
-// TODO: All dragon types
 #[derive(Deserialize, Debug, Clone, PartialEq)]
 pub enum DragonType {
     Elder,
     Earth,
+    Cloud,
+    Infernal,
+    Ocean,
+    Hextech,
+    Chemtech,
 }
 
 impl DragonType {
