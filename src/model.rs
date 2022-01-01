@@ -401,7 +401,7 @@ pub enum DragonType {
     Earth,
     Cloud,
     Fire,
-    Ocean,
+    Water,
     Hextech,
     Chemtech,
 }
