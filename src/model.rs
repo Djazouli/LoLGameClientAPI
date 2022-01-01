@@ -235,6 +235,14 @@ pub struct GameEnd {
     pub event_id: usize,
     #[serde(rename = "EventTime")]
     pub event_time: f64,
+    #[serde(rename = "Result")]
+    pub result: GameResult,
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq)]
+pub enum GameResult {
+    Win,
+    Loss,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
