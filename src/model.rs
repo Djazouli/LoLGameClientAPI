@@ -400,7 +400,7 @@ pub enum DragonType {
     Elder,
     Earth,
     Cloud,
-    Infernal,
+    Fire,
     Ocean,
     Hextech,
     Chemtech,
