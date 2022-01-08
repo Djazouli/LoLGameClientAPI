@@ -407,7 +407,7 @@ pub struct BaronKill {
 pub enum DragonType {
     Elder,
     Earth,
-    Cloud,
+    Air,
     Fire,
     Water,
     Hextech,
