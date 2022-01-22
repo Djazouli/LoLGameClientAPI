@@ -11,6 +11,7 @@ use std::error::Error;
 pub trait EventListener: Send + Sync {
     type Error: Error + Send + Sync;
     async fn on_event(&mut self, event: Event) -> Result<(), Self::Error> {
+        log::trace!("On event: {:?}", event);
         match event {
             Event::GameStart(event) => self.on_game_start(event).await,
             Event::GameEnd(event) => self.on_game_end(event).await,
