@@ -43,7 +43,12 @@ pub fn start_listener<L: EventListener + 'static>(mut listener: L, period: Durat
 
             let number_of_events = events.len();
 
-            if number_of_events <= previous_number_of_events {
+            if number_of_events < previous_number_of_events {
+                log::debug!("We started a new game");
+                previous_number_of_events = 0;
+            }
+
+            if number_of_events == previous_number_of_events {
                 // Nothing new...
                 log::debug!("Nothing new, still {} events", number_of_events);
                 tokio::time::sleep(period).await;
