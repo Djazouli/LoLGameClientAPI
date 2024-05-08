@@ -199,6 +199,10 @@ pub enum GameMode {
     Classic,
     #[serde(rename = "ARAM")]
     Aram,
+    #[serde(rename = "PRACTICETOOL")]
+    Practicetool,
+    #[serde(rename = "CHERRY")]
+    Arena,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq)]
